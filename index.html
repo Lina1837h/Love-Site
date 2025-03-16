@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            font-size: 3em;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .love-text {
+            margin: 5px 0;
+            animation: fade 3s infinite;
+        }
+
+        @keyframes fade {
+            0% { opacity: 0; transform: translateY(-20px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        audio {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновая музыка -->
+    <audio autoplay loop>
+        <source src="your-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="text-container"></div>
+
+    <script>
+        function createText() {
+            const textContainer = document.getElementById("text-container");
+
+            // Добавляем сразу много строк "I love you"
+            for (let i = 0; i < 10; i++) {
+                const text = document.createElement("div");
+                text.classList.add("love-text");
+                text.innerText = "I love you";
+                textContainer.appendChild(text);
+            }
+
+            // Удаляем старый текст, чтобы не перегружать страницу
+            while (textContainer.children.length > 50) {
+                textContainer.removeChild(textContainer.firstChild);
+            }
+        }
+
+        // Создаём текст очень быстро (каждые 200 мс)
+        setInterval(createText, 200);
+    </script>
+</body>
+</html>
